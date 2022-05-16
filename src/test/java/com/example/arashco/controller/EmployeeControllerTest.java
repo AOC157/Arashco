@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,14 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class EmployeeControllerTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "DEFAULT_NAME";
+    private static final String UPDATED_NAME = "UPDATED_NAME";
 
-    private static final String DEFAULT_PHONE = "0000000000";
-    private static final String UPDATED_PHONE = "1111111111";
+    private static final String DEFAULT_PHONE = "DEFAULT_PHONE";
+    private static final String UPDATED_PHONE = "UPDATED_PHONE";
 
-    private static final String DEFAULT_JOB_TITLE = "AAAAAAAAAA";
-    private static final String UPDATED_JOB_TITLE = "BBBBBBBBBB";
+    private static final String DEFAULT_JOB_TITLE = "DEFAULT_JOB_TITLE";
+    private static final String UPDATED_JOB_TITLE = "UPDATED_JOB_TITLE";
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -106,10 +105,10 @@ public class EmployeeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(sizeBeforeInsert + 1)))
-                .andExpect(jsonPath("$[" + (sizeBeforeInsert) +"].id").value(employee.getId()))
-                .andExpect(jsonPath("$[" + (sizeBeforeInsert) +"].phone").value(DEFAULT_PHONE))
-                .andExpect(jsonPath("$[" + (sizeBeforeInsert) +"].jobTitle").value(DEFAULT_JOB_TITLE))
-                .andExpect(jsonPath("$[" + (sizeBeforeInsert) +"].name").value(DEFAULT_NAME));
+                .andExpect(jsonPath("$[" + sizeBeforeInsert + "].id").value(employee.getId()))
+                .andExpect(jsonPath("$[" + sizeBeforeInsert + "].phone").value(DEFAULT_PHONE))
+                .andExpect(jsonPath("$[" + sizeBeforeInsert + "].jobTitle").value(DEFAULT_JOB_TITLE))
+                .andExpect(jsonPath("$[" + sizeBeforeInsert + "].name").value(DEFAULT_NAME));
     }
 
     @Test
